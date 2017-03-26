@@ -1,0 +1,482 @@
+Your MySQL connection id is 32240
+Server version: 5.5.53-0ubuntu0.14.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use first_year_db
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> input into ayush_mobiles (mobile_name , brand , price)
+    -> values
+    -> ('HTC 828' ,'HTC' , 25000),
+    -> ('GalaxyY' , 'Samsung' , 5000),
+    -> ('Curve' , 'Blackberry' , 28000),
+    -> ('Nokia Lumia 920' , 'Nokia' , 40000),
+    -> ('Nokia 3310' , 'Nokia' , 72000),
+    -> ('Redmi note 3' , 'Mi' , 12000),
+    -> ('Moto Play' , 'Moto' , 10000),
+    -> ('Moto G4plus' , 'Moto' , 14000),
+    -> ('Iphone5s' , 'Apple' , 65000),
+    -> ('Iphone7' , 'Apple' , 22000),
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'input into ayush_mobiles (mobile_name , brand , price)
+values
+('HTC 828' ,'HTC' ' at line 1
+mysql> input into ayush_mobiles (mobile_name , brand , price)
+    -> values
+    -> ('Iphone7' , 'Apple' , 22000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'input into ayush_mobiles (mobile_name , brand , price)
+values
+('Iphone7' , 'Appl' at line 1
+mysql> ("Iphone7" , "Apple" , 22000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '"Iphone7" , "Apple" , 22000)' at line 1
+mysql> input into ayush_mobiles (mobile_name , brand , price)
+    ->     -> values
+    ->     -> ('HTC 828' ,'HTC' , 25000),
+    ->     -> ('GalaxyY' , 'Samsung' , 5000),
+    ->     -> ('Curve' , 'Blackberry' , 28000),
+    ->     -> ('Nokia Lumia 920' , 'Nokia' , 40000),
+    ->     -> ('Nokia 3310' , 'Nokia' , 72000),
+    ->     -> ('Redmi note 3' , 'Mi' , 12000),
+    ->     -> ('Moto Play' , 'Moto' , 10000),
+    ->     -> ('Moto G4plus' , 'Moto' , 14000),
+    ->     -> ('Iphone5s' , 'Apple' , 65000),
+    ->     -> ('Iphone7' , 'Apple' , 22000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'input into ayush_mobiles (mobile_name , brand , price)
+    -> values
+    -> ('HT' at line 1
+mysql> input into ayush_mobiles (mobile_name , brand , price)     -> values     -> ('HTC Desire' ,'HTC' , 25000),     -> ('GalaxyY' , 'Samsung' , 5000),     -> ('Curve' , 'Blackberry' , 28000),     -> ('Nokia Lumia 920' , 'Nokia' , 40000),     -> ('Nokia 3310' , 'Nokia' , 72000),     -> ('Redmi note 3' , 'Mi' , 12000),     -> ('Moto Play' , 'Moto' , 10000),     -> ('Moto G4plus' , 'Moto' , 14000),     -> ('Iphone5s' , 'Apple' , 65000),     -> ('Iphone7' , 'Apple' , 22000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'input into ayush_mobiles (mobile_name , brand , price)     -> values     -> ('HT' at line 1
+mysql> input into ayush_mobiles (mobile_name , brand , price)     -> values     -> ('HTC Desire' ,'HTC' , 25000),     -> ('GalaxyY' , 'Samsung' , 5000),     -> ('Curve' , 'Blackberry' , 28000),     -> ('Nokia Lumia 920' , 'Nokia' , 40000),     -> ('Nokia 3310' , 'Nokia' , 72000),     -> ('Redmi note 3' , 'Mi' , 12000),     -> ('Moto Play' , 'Moto' , 10000),     -> ('Moto G4plus' , 'Moto' , 14000),     -> ('Iphone5s' , 'Apple' , 65000),     -> ('Iphone7' , 'Apple' , 22000);
+mysql> input into ayush_mobiles (mobile_name , brand , price)     -> values     -> ('HTC Desire' ,'HTC' , 25000),     -> ('GalaxyY' , 'Samsung' , 5000),     -> ('Curve' , 'Blackberry' , 28000),     -> ('Nokia Lumia ' , 'Nokia' , 40000),     -> ('Nokia chhota' , 'Nokia' , 72000),     -> ('Redmi note' , 'Mi' , 12000),     -> ('Moto Play' , 'Moto' , 10000),     -> ('Moto Gplus' , 'Moto' , 14000),     -> ('Iphonefives' , 'Apple' , 65000),     -> ('Iphonesev' , 'Apple' , 22000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'input into ayush_mobiles (mobile_name , brand , price)     -> values     -> ('HT' at line 1
+mysql> insert into ayush_mobiles (mobile_name , brand , price)     -> values     -> ('HTC 828' ,'HTC' , 25000),     -> ('GalaxyY' , 'Samsung' , 5000),     -> ('Curve' , 'Blackberry' , 28000),     -> ('Nokia Lumia 920' , 'Nokia' , 40000),     -> ('Nokia 3310' , 'Nokia' , 72000),     -> ('Redmi note 3' , 'Mi' , 12000),     -> ('Moto Play' , 'Moto' , 10000),     -> ('Moto G4plus' , 'Moto' , 14000),     -> ('Iphone5s' , 'Apple' , 65000),     -> ('Iphone7' , 'Apple' , 22000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-> values     -> ('HTC 828' ,'HTC' , 25000),     -> ('GalaxyY' , 'Samsung' , 500' at line 1
+mysql> insert into ayush_mobiles (mobile_name , brand , price)
+    -> values
+    -> ('HTC Desire' , 'HTC' , 20000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from  ayush_users;
++----+-----------+----------+------------------+------------+-----------------+--------------+
+| id | user_name | password | email            | phone      | date_of_joining | bank_balance |
++----+-----------+----------+------------------+------------+-----------------+--------------+
+|  1 | ayusha    | ayusha12 | ayusha@gmail.com | 1031756278 | 2016-05-19      |       205765 |
+|  2 | ayushb    | ayushb12 | ayushb@gmail.com | 1031753214 | 2010-04-19      |       205765 |
+|  3 | ayushc    | ayushc12 | ayushc@gmail.com | 2147483647 | 2000-03-11      |      6544765 |
+|  4 | ayushd    | ayushd12 | ayushd@gmail.com | 2147483647 | 2011-03-11      |      6554765 |
+|  5 | ayushe    | ayushe12 | ayushe@gmail.com | 2147483647 | 1998-05-15      |      6558865 |
+|  6 | ayushf    | ayushf12 | ayushf@gmail.com | 1078900021 | 2000-07-31      |      9823765 |
+|  7 | ayushg    | ayushg12 | ayushg@gmail.com | 1078910021 | 2004-02-11      |      9866665 |
+|  8 | ayushh    | ayushh12 | ayushh@gmail.com | 1078913321 | 2014-12-11      |      7976665 |
+|  9 | ayushi    | ayushi12 | ayushi@gmail.com | 1946813321 | 1992-02-13      |      7976975 |
+| 10 | ayushj    | ayushj12 | ayushj@gmail.com | 1713913321 | 1993-06-14      |      5358975 |
++----+-----------+----------+------------------+------------+-----------------+--------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from  ayush_mobiles;
++----+-------------+-------+-------+
+| id | mobile_name | brand | price |
++----+-------------+-------+-------+
+|  1 | HTC Desire  | HTC   | 20000 |
++----+-------------+-------+-------+
+1 row in set (0.00 sec)
+
+mysql> insert into ayush_mobiles (mobile_name , brand , price) values
+    ->  ('Moto G4plus' , 'Moto' , 14000),
+    -> ('Iphone7' , 'Apple' , 22000),
+    -> ('Iphone5s' , 'Apple' , 65000);
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> insert into ayush_mobiles (mobile_name , brand , price) values
+    -> ('Moto Play' , 'Moto' , 10000),
+    -> ('HTC 828' ,'HTC' , 25000),
+    -> ('Redmi note 3' , 'Mi' , 12000),
+    -> ('GalaxyY' , 'Samsung' , 5000),
+    -> ('Nokia 3310' , 'Nokia' , 72000),
+    -> ('Nokia Lumia 920' , 'Nokia' , 40000);
+Query OK, 6 rows affected (0.00 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> select * from ayush_mobiles;
++----+-----------------+---------+-------+
+| id | mobile_name     | brand   | price |
++----+-----------------+---------+-------+
+|  1 | HTC Desire      | HTC     | 20000 |
+|  2 | Moto G4plus     | Moto    | 14000 |
+|  3 | Iphone7         | Apple   | 22000 |
+|  4 | Iphone5s        | Apple   | 65000 |
+|  5 | Moto Play       | Moto    | 10000 |
+|  6 | HTC 828         | HTC     | 25000 |
+|  7 | Redmi note 3    | Mi      | 12000 |
+|  8 | GalaxyY         | Samsung |  5000 |
+|  9 | Nokia 3310      | Nokia   | 72000 |
+| 10 | Nokia Lumia 920 | Nokia   | 40000 |
++----+-----------------+---------+-------+
+10 rows in set (0.00 sec)
+
+mysql> create ayush_transactions(id int unsigned auto_increment primary key , user_id varchar not null , mobile_id varchar not null , date_of_buyind date);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ayush_transactions(id int unsigned auto_increment primary key , user_id varchar ' at line 1
+mysql> create tabel  ayush_transactions(id int unsigned auto_increment primary key , user_id varchar not null , mobile_id varchar not null , date_of_buyind date);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'tabel  ayush_transactions(id int unsigned auto_increment primary key , user_id v' at line 1
+mysql> create table  ayush_transactions(id int unsigned auto_increment primary key , user_id varchar not null , mobile_id varchar not null , date_of_buyind date);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'not null , mobile_id varchar not null , date_of_buyind date)' at line 1
+mysql> create table  ayush_transactions(id int unsigned auto_increment primary key , user_id varchar not null , mobile_id varchar not null , date_of_buying date);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'not null , mobile_id varchar not null , date_of_buying date)' at line 1
+mysql> create table  ayush_transactions(id int unsigned auto_increment primary key , user_id varchar(30) not null , mobile_id varchar(30) not null , date_of_buying date);
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> alter table ayush_transactions modify user_id int(15);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table ayush_transactions modify mobile_id int(15);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc ayush_transactions
+    -> ;
++----------------+------------------+------+-----+---------+----------------+
+| Field          | Type             | Null | Key | Default | Extra          |
++----------------+------------------+------+-----+---------+----------------+
+| id             | int(10) unsigned | NO   | PRI | NULL    | auto_increment |
+| user_id        | int(15)          | YES  |     | NULL    |                |
+| mobile_id      | int(15)          | YES  |     | NULL    |                |
+| date_of_buying | date             | YES  |     | NULL    |                |
++----------------+------------------+------+-----+---------+----------------+
+4 rows in set (0.01 sec)
+
+mysql> insert into ayush_transactions (user_id , mobile_id , date) values
+    -> (3 , 1, 2004-5-1),
+    -> (5 , 3, 2004-5-2),
+    -> (7 , 3, 2004-5-3),
+    -> (10 ,9 , 2004-5-4),
+    -> (6 , 10 , 2004-6-3);
+ERROR 1054 (42S22): Unknown column 'date' in 'field list'
+mysql> insert into ayush_transactions (user_id , mobile_id , date) values
+    -> (6 , 10 , 2004-06-03);
+ERROR 1054 (42S22): Unknown column 'date' in 'field list'
+mysql> (10 ,9 , 2004-05-04),
+    -> (7 , 3, 2004-05-03),
+    -> (5 , 3, 2004-05-02),
+    -> (3 , 1, 2004-05-01),
+    -> (7 , 8, 2004-05-01),
+    -> (6 , 3 , 2004-04-26),
+    -> (5 , 4 , 2004-04-21),
+    -> (9 , 1 , 2004-04-16),
+    -> (10 , 10 , 2004-03-26),
+    -> (1,2,2004-03-20),
+    -> (4 , 3 , 2004-02-27),
+    -> (2 , 1 , 2004-02-22),
+    -> (8 , 7 , 2004-02-15),
+    -> (1 , 1 , 2004-01-31),
+    -> (10 , 3 , 2004-01-27),
+    -> (2 , 9 , 2004-01-01);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '10 ,9 , 2004-05-04),
+(7 , 3, 2004-05-03),
+(5 , 3, 2004-05-02),
+(3 , 1, 2004-05-0' at line 1
+mysql> (2 , 9 , 2004-01-01);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '2 , 9 , 2004-01-01)' at line 1
+mysql> insert into ayush_transactions (user_id , mobile_id , date_of_buying) values
+    -> (7 , 3, 2004-05-03),
+    -> (2 , 9 , 2004-01-01);
+Query OK, 2 rows affected, 2 warnings (0.00 sec)
+Records: 2  Duplicates: 0  Warnings: 2
+
+mysql> insert into ayush_transactions (user_id , mobile_id , date_of_buying) values
+    -> (10 ,9 , 2004-05-04), (5 , 3, 2004-05-02), (3 , 1, 2004-05-01), (7 , 8, 2004-05-01), (6 , 3 , 2004-04-26), (5 , 4 , 2004-04-21), (9 , 1 , 2004-04-16), (10 , 10 , 2004-03-26), (1,2,2004-03-20), (4 , 3 , 2004-02-27), (2 , 1 , 2004-02-22), (8 , 7 , 2004-02-15), (1 , 1 , 2004-01-31), (10 , 3 , 2004-01-27);
+Query OK, 14 rows affected, 14 warnings (0.00 sec)
+Records: 14  Duplicates: 0  Warnings: 14
+
+mysql> select * from ayush_transactions
+    -> ;
++----+---------+-----------+----------------+
+| id | user_id | mobile_id | date_of_buying |
++----+---------+-----------+----------------+
+|  1 |       7 |         3 | 0000-00-00     |
+|  2 |       2 |         9 | 0000-00-00     |
+|  3 |      10 |         9 | 0000-00-00     |
+|  4 |       5 |         3 | 0000-00-00     |
+|  5 |       3 |         1 | 0000-00-00     |
+|  6 |       7 |         8 | 0000-00-00     |
+|  7 |       6 |         3 | 0000-00-00     |
+|  8 |       5 |         4 | 0000-00-00     |
+|  9 |       9 |         1 | 0000-00-00     |
+| 10 |      10 |        10 | 0000-00-00     |
+| 11 |       1 |         2 | 0000-00-00     |
+| 12 |       4 |         3 | 0000-00-00     |
+| 13 |       2 |         1 | 0000-00-00     |
+| 14 |       8 |         7 | 0000-00-00     |
+| 15 |       1 |         1 | 0000-00-00     |
+| 16 |      10 |         3 | 0000-00-00     |
++----+---------+-----------+----------------+
+16 rows in set (0.00 sec)
+
+mysql> delete from ayush_transactions where id<17;
+Query OK, 16 rows affected (0.00 sec)
+
+mysql> select * from ayush_transactions;
+Empty set (0.00 sec)
+
+mysql> insert into ayush_transactions (user_id , mobile_id , date_of_buying) values (10 ,9 , '2004-05-04'), (5 , 3, '2004-05-02'), (3 , 1, '2004-05-01'), (7 , 8, '2004-05-01'), (6 , 3 , '2004-04-26'), (5 , 4 , '2004-04-21'), (9 , 1 , '2004-04-16'), (10 , 10 , '2004-03-26'), (1,2,'2004-03-20'), (4 , 3 , '2004-02-27'), (2 , 1 , '2004-02-22'), (8 , 7 , '2004-02-15'), (1 , 1 , '2004-01-31'), (10 , 3 , '2004-01-27');
+Query OK, 14 rows affected (0.00 sec)
+Records: 14  Duplicates: 0  Warnings: 0
+
+mysql> select * from ayush_transactions;
++----+---------+-----------+----------------+
+| id | user_id | mobile_id | date_of_buying |
++----+---------+-----------+----------------+
+| 17 |      10 |         9 | 2004-05-04     |
+| 18 |       5 |         3 | 2004-05-02     |
+| 19 |       3 |         1 | 2004-05-01     |
+| 20 |       7 |         8 | 2004-05-01     |
+| 21 |       6 |         3 | 2004-04-26     |
+| 22 |       5 |         4 | 2004-04-21     |
+| 23 |       9 |         1 | 2004-04-16     |
+| 24 |      10 |        10 | 2004-03-26     |
+| 25 |       1 |         2 | 2004-03-20     |
+| 26 |       4 |         3 | 2004-02-27     |
+| 27 |       2 |         1 | 2004-02-22     |
+| 28 |       8 |         7 | 2004-02-15     |
+| 29 |       1 |         1 | 2004-01-31     |
+| 30 |      10 |         3 | 2004-01-27     |
++----+---------+-----------+----------------+
+14 rows in set (0.00 sec)
+
+mysql> update ayush_transactions set id = id-16;
+Query OK, 14 rows affected (0.00 sec)
+Rows matched: 14  Changed: 14  Warnings: 0
+
+mysql> select * from ayush_transactions;
++----+---------+-----------+----------------+
+| id | user_id | mobile_id | date_of_buying |
++----+---------+-----------+----------------+
+|  1 |      10 |         9 | 2004-05-04     |
+|  2 |       5 |         3 | 2004-05-02     |
+|  3 |       3 |         1 | 2004-05-01     |
+|  4 |       7 |         8 | 2004-05-01     |
+|  5 |       6 |         3 | 2004-04-26     |
+|  6 |       5 |         4 | 2004-04-21     |
+|  7 |       9 |         1 | 2004-04-16     |
+|  8 |      10 |        10 | 2004-03-26     |
+|  9 |       1 |         2 | 2004-03-20     |
+| 10 |       4 |         3 | 2004-02-27     |
+| 11 |       2 |         1 | 2004-02-22     |
+| 12 |       8 |         7 | 2004-02-15     |
+| 13 |       1 |         1 | 2004-01-31     |
+| 14 |      10 |         3 | 2004-01-27     |
++----+---------+-----------+----------------+
+14 rows in set (0.00 sec)
+
+mysql> insert into ayush_transactions (user_id , mobile_id , date_of_buying) values (7, 3 , '2004-01-03');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from ayush_transactions;
++----+---------+-----------+----------------+
+| id | user_id | mobile_id | date_of_buying |
++----+---------+-----------+----------------+
+|  1 |      10 |         9 | 2004-05-04     |
+|  2 |       5 |         3 | 2004-05-02     |
+|  3 |       3 |         1 | 2004-05-01     |
+|  4 |       7 |         8 | 2004-05-01     |
+|  5 |       6 |         3 | 2004-04-26     |
+|  6 |       5 |         4 | 2004-04-21     |
+|  7 |       9 |         1 | 2004-04-16     |
+|  8 |      10 |        10 | 2004-03-26     |
+|  9 |       1 |         2 | 2004-03-20     |
+| 10 |       4 |         3 | 2004-02-27     |
+| 11 |       2 |         1 | 2004-02-22     |
+| 12 |       8 |         7 | 2004-02-15     |
+| 13 |       1 |         1 | 2004-01-31     |
+| 14 |      10 |         3 | 2004-01-27     |
+| 31 |       7 |         3 | 2004-01-03     |
++----+---------+-----------+----------------+
+15 rows in set (0.00 sec)
+
+mysql> update ayush_transactions set id = id-16 where id=31;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from ayush_transactions;
++----+---------+-----------+----------------+
+| id | user_id | mobile_id | date_of_buying |
++----+---------+-----------+----------------+
+|  1 |      10 |         9 | 2004-05-04     |
+|  2 |       5 |         3 | 2004-05-02     |
+|  3 |       3 |         1 | 2004-05-01     |
+|  4 |       7 |         8 | 2004-05-01     |
+|  5 |       6 |         3 | 2004-04-26     |
+|  6 |       5 |         4 | 2004-04-21     |
+|  7 |       9 |         1 | 2004-04-16     |
+|  8 |      10 |        10 | 2004-03-26     |
+|  9 |       1 |         2 | 2004-03-20     |
+| 10 |       4 |         3 | 2004-02-27     |
+| 11 |       2 |         1 | 2004-02-22     |
+| 12 |       8 |         7 | 2004-02-15     |
+| 13 |       1 |         1 | 2004-01-31     |
+| 14 |      10 |         3 | 2004-01-27     |
+| 15 |       7 |         3 | 2004-01-03     |
++----+---------+-----------+----------------+
+15 rows in set (0.00 sec)
+
+mysql> 
+mysql> select user_name , email , phone
+    -> from ayush_users;
++-----------+------------------+------------+
+| user_name | email            | phone      |
++-----------+------------------+------------+
+| ayusha    | ayusha@gmail.com | 1031756278 |
+| ayushb    | ayushb@gmail.com | 1031753214 |
+| ayushc    | ayushc@gmail.com | 2147483647 |
+| ayushd    | ayushd@gmail.com | 2147483647 |
+| ayushe    | ayushe@gmail.com | 2147483647 |
+| ayushf    | ayushf@gmail.com | 1078900021 |
+| ayushg    | ayushg@gmail.com | 1078910021 |
+| ayushh    | ayushh@gmail.com | 1078913321 |
+| ayushi    | ayushi@gmail.com | 1946813321 |
+| ayushj    | ayushj@gmail.com | 1713913321 |
++-----------+------------------+------------+
+10 rows in set (0.00 sec)
+
+mysql> select mobile_name from ayush_mobiles where brand="Apple";
++-------------+
+| mobile_name |
++-------------+
+| Iphone7     |
+| Iphone5s    |
++-------------+
+2 rows in set (0.00 sec)
+
+mysql> select mobile_name,price  from ayush_mobiles where brand="Apple" order by price;
++-------------+-------+
+| mobile_name | price |
++-------------+-------+
+| Iphone7     | 22000 |
+| Iphone5s    | 65000 |
++-------------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select count(distinct brand) from ayush_mobiles;
++-----------------------+
+| count(distinct brand) |
++-----------------------+
+|                     6 |
++-----------------------+
+1 row in set (0.00 sec)
+
+mysql> select * (select count mobile_name from ayush_mobiles) as count from ayush_mobiles group by brand;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(select count mobile_name from ayush_mobiles) as count from ayush_mobiles group ' at line 1
+mysql> select * (select count (mobile_nam)^Zfrom ayush_mobiles) as count from ayush_mobiles group by brand;
+[1]+  Stopped                 mysql -u first_year -h 192.168.121.187 -p
+first_year@vortex:~$ mysql -u first_year -h 192.168.121.187 -p
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 33376
+Server version: 5.5.53-0ubuntu0.14.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use first_year_db;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> select * (select count (mobile_name) from ayush_mobiles) as count from ayush_mobiles group by brand;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(select count (mobile_name) from ayush_mobiles) as count from ayush_mobiles grou' at line 1
+mysql> select count(mobile_name) from ayush_mobiles group by brand;
++--------------------+
+| count(mobile_name) |
++--------------------+
+|                  2 |
+|                  2 |
+|                  1 |
+|                  2 |
+|                  2 |
+|                  1 |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> select brand, count(mobile_name) from ayush_mobiles group by brand;
++---------+--------------------+
+| brand   | count(mobile_name) |
++---------+--------------------+
+| Apple   |                  2 |
+| HTC     |                  2 |
+| Mi      |                  1 |
+| Moto    |                  2 |
+| Nokia   |                  2 |
+| Samsung |                  1 |
++---------+--------------------+
+6 rows in set (0.00 sec)
+
+mysql> select distinct brand from ayush_mobiles;
++---------+
+| brand   |
++---------+
+| HTC     |
+| Moto    |
+| Apple   |
+| Mi      |
+| Samsung |
+| Nokia   |
++---------+
+6 rows in set (0.00 sec)
+
+mysql> select count(user_id) from ayush_transactions inner join ayush_mobiles on ayush_transactions.mobile_id = ayush_mobiles.id where ayush_mobiles.mobile_name = "Iphone7";
++----------------+
+| count(user_id) |
++----------------+
+|              5 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> select count(mobile_id), sum(ayush_mobiles.price) from ayush_transactions inner join ayush_mobiles on ayush_transactions.mobile_id = ayush_mobiles.id where ayush_transitions.user_id=10;
+ERROR 1054 (42S22): Unknown column 'ayush_transitions.user_id' in 'where clause'
+mysql> select count(mobile_id), sum(ayush_mobiles.price) from ayush_transactions inner join ayush_mobiles on ayush_transactions.mobile_id = ayush_mobiles.id where ayush_transactions.user_id=10;
++------------------+--------------------------+
+| count(mobile_id) | sum(ayush_mobiles.price) |
++------------------+--------------------------+
+|                3 |                   134000 |
++------------------+--------------------------+
+1 row in set (0.00 sec)
+
+mysql> select brand from ayush_mobiles inner join ayush_transactions on ayush_mobiles.id = ayush_transactions.mobile_id where ayush_transactions.user_id=( select user_id from ayush_transactions inner join ayush_users on ayush_transactions.user_id = ayush_users.id where ayush_users.user_name = 'ayushj');
+ERROR 1242 (21000): Subquery returns more than 1 row
+mysql> select user_id from ayush_transactions inner join ayush_users on ayush_transactions.user_id = ayush_users.id where ayush_users.user_name = 'ayushj';
++---------+
+| user_id |
++---------+
+|      10 |
+|      10 |
+|      10 |
++---------+
+3 rows in set (0.00 sec)
+
+mysql> select brand from ayush_mobiles inner join ayush_transactions on ayush_mobiles.id = ayush_transactions.mobile_id where ayush_transactions.user_id=( select distinct user_id from ayush_transactions inner join ayush_users on ayush_transactions.user_id = ayush_users.id where ayush_users.user_name = 'ayushj');
++-------+
+| brand |
++-------+
+| Nokia |
+| Nokia |
+| Apple |
++-------+
+3 rows in set (0.00 sec)
+
+mysql> 
+

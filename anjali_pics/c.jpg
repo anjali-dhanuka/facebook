@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+     <link rel="icon" type="image/png" href="http://www.downtownmagazinenyc.com/wp-content/uploads/2011/11/Get-A-Game-logo.png "> 
+    <head>
+       <link rel="stylesheet" type="text/css"  href="file:///home/gen/assignment.css">  
+
+       <title>
+                 Gameshop for engineers!
+       </title>
+       <script>
+            function login_check()
+               { 
+                    var x= document.forms["login"]["user"].value;
+                         if (x == "")
+                                 {
+                                       alert("Enter a valid username!");
+                                       return false;
+                                  }
+               }
+           function signup()
+                {   
+			
+                    x=document.forms["register"]["name"].value;
+                    if(x == "")
+                         {  alert("Enter your name");
+                            return false;
+                          }
+                    for(i=0;i<x.length;i++)
+                          { if(x[i]<65 || x>122 || (x>90 && x<97) )	
+                                 if(x[i]!=" ")
+                                     { alert("Only alphabets allowed in name!");
+                                          return false;
+                                    }
+                          }
+                    x=document.forms["register"]["username"].value;
+                    if(x == "") { alert("Enter a username"); return false; }
+                     
+                  x=document.forms["register"]["branch"].value;
+                                         
+                    if(x == "none")
+                      {  alert("Select a branch!");
+                         return false; 
+                      } 
+                 
+                 x=document.forms["register"]["number"].value;
+                   if(x == "")
+                                     {
+                                       alert("Enter enrollment number!");
+                                       return false;
+                                  }
+                  for(i=0; i<x.length; i++)
+                       if(x[i]>48 || x[i]<57) 
+                               { alert("Only digits allowed in enrollent no.!"); return false; }
+                 
+                     x=document.forms["register"]["email"].value;
+                     posat=x.lastIndexOf("@");
+                     posdot=x.lastIndexOf(".");
+                    if( posat==-1 || posdot==-1 || posat>posdot || posat==0) 
+                        { alert("Enter a complete and valid email address"); return false; }
+                   
+               x=document.forms["register"]["terms"].value;
+                  if(!x.checked) 
+                     {   alert("Accept terms");
+                      return false; 
+                       }
+
+			
+                 }
+       </script>
+	
+     </head>
+     <body>
+         <div id="Head">
+                  
+                      <a href="http://www.gamespot.com">
+		 <img src="http://www.techknuckle.com/images/Gamer%20Text.gif"  />
+                       </a>
+                   
+                   
+                   
+                      <form onsubmit="return login_check()" name="login"> <span>gameshop</span>    
+                         <input type="text" name="user" placeholder="username" height="30">
+                         <input type="password" name="password" placeholder="password" height="30">
+                         <input type="image" src="http://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Green_Arrow_Right.svg/600px-Green_Arrow_Right.svg.png" alt="Submit" height="30" width="30">
+                       </form>
+                  
+             </div>
+         <div id="content">
+          
+              <center>  <h1>SIGN UP</h1> </center>
+          <table>
+                <tbody>  
+                   <div id="input">
+                    <form onsubmit="return signup()" name="register">
+                       
+ 
+                     <tr>
+                         <td> Name :</td> 
+                         <td><input type="text" name="name" placeholder="FULL NAME" ></td>
+                     </tr>
+                     <tr>  
+                         <td> Username :</td>
+                         <td><input type="text" name="username" placeholder="username"></td>
+                       
+                     </tr>
+                     <tr> 
+                          <td>E-Mail :</td>
+                          <td><input type="email" name="email" placeholder="E-Mail"></td>
+                     </tr>
+                     <tr>
+                         <td>Enrollment-Number :</td>
+                         <td><input type="text" name="number" placeholder="enrollment number"></td>
+                     </tr>
+                     <tr>
+                         <td> Branch :</td>
+                         <td><select name="branch" >
+                            <option value="none" selected>Select your branch</option>
+                            <option value="ee">Electrical</option>
+                            <option value="mech">Mechanical</option>
+                            <option value="civil">Civil</option>
+                            <option value="ece">Electronics & Communication</option>
+                            <option value="other">Others</option>
+                             </select><td>
+                      </tr>
+                      <tr>
+                             <td> Gender :</td>
+                             <td><input type="radio" name="gender" value="male" checked>Male
+                                 <input type="radio" name="gender" value="female">Female</td>
+                       </tr>
+                       <tr>
+                            <td> About :</td> 
+                            <td><textarea  name="about" />
+                                </textarea></td>
+                       </tr>
+                   </tbody>
+                   </table>   
+                       <div id="term">
+                              </br></br> <input type="checkbox" id="terms" name="terms" value="terms"> **By clicking this, you accept the terms and condtions of the Facebook.
+                       </div>
+                       </br></br> <center><input type="submit" value="Submit"></center>
+                   </form>
+                </div>         
+          </div>
+        <div id="end">
+              <img src="http://www.copyrightfrance.com/images/copyright_image_2.jpg" />
+               Copyright | 2015
+               
+         </div>
+   <span style="color:white; font-weight:bold"> <br/>*Shop for Engineers!</span>  
+         
+     </body>
+
+</html>

@@ -1,0 +1,382 @@
+s we saw in the last chapter, random graphs have some crucial shortcomings that prevent us from using it as a full-fledged model for real world networks. In this chapter, we take a look at techniques that modify the original model of the random graph to improve upon these shortcomings. In the first section, we shall analyse only undirected graphs. Towards the second half of this chapter, we will look at techniques developed for directed graphs.
+
+\section{Arbitrary degree distributions in random \\graphs}
+
+As was shown towards the end of chapter 1, real world networks exhibit degree distribution that are - generally - non Poissonian in nature. The actual distribution may be a powerlaw distribution, an exponential-like distribution or more generally, any arbitrary degree distribution (since an actual network is to restricted to any fixed degree distribution). The method to incorporate any arbitrary degree distribution in a random graph is quite simple: we create a degree sequence and assign the degrees of the vertices in the graph from the sequence.
+
+Mathematically, let the degree sequence be $\{k_i\}$ where $0 \le i \le N$. The way this degree distribution is constructed is such that for large $N$, the vertices which have degree $k$ is a fraction equal to $p_k$, the desired distribution. In fact, usually it's simpler to get the sequence by sampling directly from the required distribution $p_k$.
+
+The method of constructing a graph is then as follows: We take the $i^{th}$ vertex and make $k_i$ incomplete edges emerge from the vertex. We do so for each of the $N$ vertices. Now, we simply join all the half-edges together in a way that no half-edge remains in the graph. Thus, we obtain one possible member of the set of all possible random graphs that could be constructed from our specific degree sequence. The total possible number of graphs can be obtained as follows: For each vertex, we have a possible $k_i!$ number of choices for the way we can connect its half-edges to other vertices. Thus, the total number of possible choices then is simply $\displaystyle \prod_{i=1}^{N} k_i!$. This is the total number of graphs that can be formed with a particular degree sequence. An interesting fact is that as long as the degree sequence does not change, we have the same possible number of graphs. This means that we can appropriately sample graphs from this set randomly and uniformly as opposed to if we decided to simply choose a degree distribution (and the not the sequence), then this number may change and the sampling would not be uniform in such a case as the number of possible graphs may change depending on how we distribute the degrees to the vertices. Thus, it is important to fix the degree sequence and not the distribution.
+
+There is however an apparent shortcoming to this method: it does not deal with the problem of no clustering in random graphs, that is, it isn't possible to fix a clustering coefficient. While this might appear to be a problem at first, it actually allows us to calculate many properties of graphs in the when $N$ is large.
+
+TODO (Add case about $z_2$).
+
+\subsection{Calculation of mean number of second neighbours} \label{secondnbr}
+
+We will now see how to arrive at the mean number of second neighbours of a graph. For this, we need a crucial insight: since a vertex with a large degree will have a large number of vertices connected to it, it stands to reason that any vertex will have more edges emanating from it, the number of edges being proportional to the degree of the vertex. So, for the second neighbour of a vertex $v$ with degree $k$, we have $k$ different vertices connected to $v$, each of which have neighbours of their own. Thus, the number of second neighbours of $v$ is proportional to not just $p_k$ (as in the case of number of first neighbours) but to $k p_k$.
+
+Let us represent this distribution of the second neighbours of $v$ by $q_k$. Then, since the number of second neighbours of a vertex will also involve the vertex itself, we would need to subtract one from the degree of the vertex in the distribution to arrive at the correct result. Then, normalizing the above result, we get:
+\begin{equation}
+    \begin{split}
+        & q_{k-1} = \frac{k p_k}{\sum_{i} i p_i}\\
+        \therefore{ } & q_{k} = \frac{(k + 1) p_{k+1}}{\sum_{i} i p_i}
+    \end{split}
+\end{equation}
+
+Now, let's calculate the average number of second neighbours of a vertex.
+
+\begin{equation}
+    \begin{split}
+        \displaystyle\sum_{k=0}^{\infty} k q_k & = 
+        \frac{\displaystyle\sum_{k=0}^{\infty} k (k+1) p_{k+1}}{\sum_{i} i p_i}\\
+        & = \frac{\displaystyle\sum_{k=0}^{\infty} (k-1) k p_k}{\sum_{i} i p_i}\\
+        & = \frac{\langle k^2 \rangle - \langle k \rangle}{\langle k \rangle}
+    \end{split}
+\end{equation}
+
+This last value if the number of neighbours at a distance of two from a vertex. If we multiply this by the average degree of a vertex, $z=\langle k \rangle$, we get the desired quantity, the average number of second neighbours of a vertex in the graph. It is denoted by $z_2$:
+\begin{equation} \label{z2equation}
+    \begin{split}
+        z_2 = \langle k^2 \rangle - \langle k \rangle
+    \end{split}
+\end{equation}
+
+For the Erdős and Rényi random graph with the Poisson degree distribution, a similar calculation leads to $z_2 = \langle k \rangle^2$, i.e., just the square of the average degree of a vertex in the graph.
+
+This calculation can be also used for higher order neighbours, that is, neighbours at an arbitrary distance from a vertex. Let $z_n$ denote the average number of neighbours of a vertex at a distance $n$ away. Then, using the logic of \ref{z2equation} and $z_1 \equiv z$, we can write:
+\begin{equation} \label{zncalc}
+    \begin{split}
+        z_n & = \frac{\langle k^2 \rangle - \langle k \rangle}{\langle k \rangle} z_{n-1}\\
+        & = \frac{z_2}{z_1} z_{n-1}\\
+        & = \left[ \frac{z_2}{z_1} \right] ^ {n-1} z_1
+    \end{split}
+\end{equation}
+
+This gives us a way to calculate the phase transition point in the graph. If $z_2 > z_1$, then in the limit of large graph size, the value of $z_n$ blows up because of a huge exponent. This means that the average number of vertices of a vertex $v$ at a grows without bound which clearly means that there exists a huge component in the graph. On the other hand, if $z_2 < z_1$, the value of $z_n$ remains finite for any value of $n$, no matter the size of the graph. This clearly indicates that there is no giant component in the graph. Both of these facts, taken together, imply that that phase transition occurs at the point $z_1 = z_2$. For the non-corrected Erdős and Rényi random graph, $z_2 = {z_1}^2$, which implies that phase transition occurs at the point $z_1 = 1$. This means the transition point is when the same as mentioned in the section \ref{advantagesOfRG}.
+
+For the degree distribution corrected random graph, $z_2 = z_1$ leads us to the equation ${\langle k^2 \rangle - 2 \langle k \rangle = 0}$ which in turn leads to:
+
+\begin{equation} \label{blowcondition}
+    \begin{split}
+        \displaystyle\sum_{k=0}^{\infty} k (k-2) p_{k} = 0
+    \end{split}
+\end{equation}
+
+An interesting consequence of the equation \ref{blowcondition} is that the vertices with degrees $0$ and $2$ do not matter in the calculation. Upon further inspection, this is obvious: vertices with no edges emanating from them cannot influence the formation of the giant component. Similarly, if we remove all vertices with degree $2$ by joining together the two edges incident on the vertex, we don't change the overall topology of the network. Thus, we can either add or delete vertices of degree 0 and 2 without any consequence on the formation of the huge component.
+
+\section{Calculation of mean vertex to vertex distance}
+
+An interesting property of any network is the average distance between any two nodes. This is important because it denotes the how "dense" or tightly connected the network is. We will now use the equation \ref{zncalc} to determine this quantity. First, let's consider the case when the huge component has not yet formed. In this, the graph is largely disconnected and the average distance between vertices is quite small since the components themselves are small and so, this quantity does not provide a realistic measurement of the degree of separation in the graph and therefore is not useful. On the other hand, if the huge component formation has already occurred, the mean distance between vertices does give a real measure of the degree of separation of the graph. For this let us consider what happens to $z_n$ value as the graph becomes very large in size? The answers is that the number of vertices (on average) that are situated at a distance of $n$ away from a vertex is approximately equal to total number of vertices in the graph, $N$. In such a case, $n$ has a special name - it's called the graph's radius and in this case, the radius is in fact the average vertex to vertex separation. It is denoted by $\ell$ and upon calculation, we find:
+\begin{equation} \label{vertdist}
+    \begin{split}
+        \ell = \frac{log(N/z_1)}{log(z_2/z_1)} + 1
+    \end{split}
+\end{equation}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.3]{vert-dist}
+    \caption{Comparison of average distance between vertices; theoretical vs. actual values}
+    \label{fig:vert-dist}
+\end{figure}
+
+In the case of Erdős and Rényi random graph, this equation simplifies to (by virtue of points discussed in section \ref{secondnbr}) the following:
+$$
+\ell = \frac{log\;N}{ log\; z}
+$$
+
+
+
+As can be seen, the mean distance between vertices increases logarithmically with $N$. This means that even if the network grows very large, the average distance between vertices remains the same. This curious phenomenon is termed the \textbf{small world effect}.
+
+In the figure \ref{fig:vert-dist}, we see that the formula derived above works quite well for several collaborative networks. On the horizontal axis, we see the average distance in the modelled random graph whereas on the vertical axis, we see the actual measured value for this distance. Since the theoretical values are actually just approximate values, the data-points on the graphs do not lie perfectly on the $y=x$ line but the results are close. This is a validation for the theory. Also, this provide a way to calculate $\ell$ easily since calculating $\ell$ for large graphs is very time intensive process. Since $z_1$ and $z_2$ are much easier to calculate, therefore, it is far easier to calculate $\ell$ this way instead of performing the actual computation.
+
+\section{Calculation of clustering coefficient}
+
+Even though the current model with a fixed degree sequence does not allow us to specify a coefficient of clustering, we can still make an approximation for it. For this, let's take a vertex $v$. It's $j^{th}$ neighbour has the $k_j$ edges connected to it. If we remove the edge connecting it back to $v$, the degree distribution is simply $q_k$. Then, the probability that a vertex $i$ is connected to it is simply $k_j k_i / N z$. Then,
+
+\begin{equation} \label{clustering-coeff}
+    \begin{split}
+        \mathcal{C} &= \frac{\left< k_j k_i\right>}{N z}\\
+        & = \frac{1}{N z} \left[ \displaystyle\sum_{k} k q_k \right]^2\\
+        & = \frac{z}{N} {\left[ \frac{\langle k^2 \rangle - \langle k \rangle}{\langle k \rangle}\right]}^2\\
+        \therefore{}\;\;\;\mathcal{C}& = \frac{z}{N}\left[ c_v^2 + \frac{z-1}{z} \right]^2
+    \end{split}
+\end{equation}
+
+Here, $c_v$ is the variation coefficient which is simply the standard deviation divided by the mean of the degree distributions. If we compare this with the clustering coefficient of random graph - which was $\mathcal{C} = z/N$ - then we see that the value of $\mathcal{C}$ for a fixed degree sequence graph includes a multiplication factor as compared with the Poisson distributed random graph. This, in turn, improves the value of calculated theoretical calculation of the clustering coefficient. As an example, the www links on the internet have an actual $\mathcal{C}$ value of $0.11$. While the clustering computed by the Erdős and Rényi random graph is quite small, ($\mathcal{C} = 0.00023$), the value obtained by the the improved model is $\mathcal{C} = 0.048$ which, while still not good enough, is much closer to the actual value than the one computed by the non-improved random graph.
+
+For real world networks with high clustering, this calculation leads to an even larger discrepancy in the theoretical values as compared to the real clustering coefficient values. This will be addressed in later sections.
+
+\section{Using probability generating functions}
+
+While we can continue performing calculations as we were before, it has been found to be much easier doing calculations using the probability generating functions (PGF). PGFs were discussed in the the first chapter of this thesis under the section topics in probability theory.
+
+Let the vertex degree distribution be $p_k$. Then, we define the PDF as follows:
+\begin{equation} \label{g0formula}
+    \begin{split}
+        G_0(x) = \displaystyle\sum_{k=0}^{\infty} p_k x^k
+    \end{split}
+\end{equation}
+
+Then, obtaining the $p_k$ values is a simple affair of differentiating the PGF $k$ times:
+\begin{equation}
+    p_k = \frac{G_0^{(k)}(0)}{k!}
+\end{equation}
+
+Then, we say that the function $G_0(x)$ generates the probability distribution $p_k$ and thus comes the name probability generating function.
+
+Now, let us find out the PGF for the distribution of second neighbours, that is, for $q_k$.
+
+\begin{equation} \label{g1formula}
+    \begin{split}
+        G_1(x) = \displaystyle\sum_{k=0}^{\infty} q_k x^k
+        & = \frac{\sum_{k=0}^{\infty}p_{k+1} (k+1) x^k}{\sum_{j} p_j} \\
+        & = \frac{\sum_{k=0}^{\infty}p_k k x^{k-1}}{\sum_{j} p_j} \\
+        & = \frac{G'_0(x)}{z}
+    \end{split}
+\end{equation}
+
+\subsection{Properties of probability generating functions}
+
+A necessary condition for any PFG is that sums of all probabilities must sum up to unity.
+$$
+G_0(0) = G_1(0) = 1
+$$
+
+We can find the average degree of the graph by calculating the first moment of the distribution:
+$$
+\left<k\right> = \sum_{k} k p_k = G'_0(1)
+$$
+
+More generally, we can calculate any moment as follows:
+$$
+\left<k^r\right> = \sum_{k} k^r p_k = \left(x \frac{d}{dx}\right)^r G_0(x) \Bigr|_{\substack{x=1}} 
+$$
+
+While these are helpful, the most important property is the following: if $G_0(x)$ generates the probability distribution for a property $\mathcal{P}$ of a mathematical construct then $G_0(x)^r$ is the PGF for the sum of the property values for $r$ different independent objects.
+
+\subsubsection{Generating function for the Erdős and Rényi random graph}
+
+For the Erdős and Rényi random graph, we calculate the PGF by substituting the Poisson distribution in the equation \ref{g0formula} as follows:
+\begin{equation}
+    G_0(x) = e^{-z} \displaystyle\sum_{k=0}^{\infty} \frac{z^k}{k!} x^k = e^{z(x-1)}
+\end{equation}
+
+Now, using the relation between $G_1(x)$ and $G_0(x)$ from the equation \ref{g1formula}, we can calculate the PGF for the degree distribution of second neighbours:
+\begin{equation}
+    G_1(x) = \frac{G'_0(x)}{z} = e^{z(x-1)}
+\end{equation}
+
+We see that for the Erdős and Rényi random graph, $G_0(x) = G_1(x)$. This is one of the reason that analysis of this random graph is quite simple.
+
+\section{Undirected network properties}
+
+Using the mathematics developed above, we can calculate several interesting properties of undirected networks.
+
+\subsection{Component size distribution}
+
+As we discussed earlier, a network has several small components that are disconnected from each other and, above the phase transition point, a huge component whose size grows linearly with the size of the whole graph. We will now calculate the distribution of the sizes of these components.
+
+First, we will consider only the below phase transition region where the giant component hasn't formed yet. As mentioned earlier, one of the essential properties of the graph for these calculations to hold is the requirement for the graphs to have a small clustering coefficient and that the results of the equation \ref{clustering-coeff} be at least comparable to the values obtained from the graph itself. In such a case, as the size $N$ of the graph goes to infinity, the clustering coefficient goes to zero. Since this is the clustering coefficient, by its definition, this means that the probability that there would be closed loops in the graphs also goes to zero. This crucial fact - of the network components begin trees - makes further calculations possible.
+
+Now, we calculate the distribution of components. At the two ends of any randomly chosen edge, there exists a cluster of vertices connected to either of the two ends. Let $H_1(x)$ be the generating function that would, upon differentiation, generate the distribution of cluster sizes at the ends. Also, if there are any edges that are connected to the end-vertex of the current edge, then each of those edges also have cluster size distribution given by probabilities generated by $H_1(x)$.
+
+At the end of out random edge, the vertex may have more edges that emanate from it. Let this number of edges be $k$. Then, the number of edges (excluding the one edge along which we reach this vertex) emanating from this second neighbours is distributed as $q_k$. Using the multiplicative property of the PGFs discussed in the last section, the total size of the $k$ second neighbour clusters (which is simply the sum of sizes of all $k$ clusters) has the PGF $H_1(x)^k$.
+
+Now using this, we can formulate a recursive definition of for $H_1(x)$ as follows:
+\begin{equation} \label{h1formula}
+    H_1(x) = x \displaystyle\sum_{k=0}^{\infty} q_k \left[H_1(x)\right]^k = x G_1(H_1(x))
+\end{equation}
+
+Now, let's backtrack for a moment to what we started with - the distribution of cluster sizes. Let $v$ be a vertex. Then, the number of edges emerging from this vertex is is distributed as $p_k$. For each of these edges, there exists a cluster at the other end of each such edge which is distributed by a distribution generated by $H_1(x)$. Therefore, we have the following definition for $H_0(x)$:
+\begin{equation} \label{h0formula}
+    H_0(x) =  x \displaystyle\sum_{k=0}^{\infty} p_k \left[H_1(x)\right]^k = x G_0H_1(x))
+\end{equation}
+
+Therefore, to get the PGF $H_0(x)$, we first solve for $H_1(x)$ using equation \ref{h1formula} and then, using the equation \ref{h0formula}, we can then get $H_0(x)$.
+
+While this theoretical method holds, in many practical cases of real networks, closed form solutions for either one for both $H_1(x)$ and $H_0(x)$ do not exist. In such a case, we follow an iterative scheme to achieve the results. Using this method, it is possible to solve upto any arbitrary accuracy $m$ by iteration. The reason this iteration works is quite straightforward: If we have an accurate expression for $H_1(x)$ till order $m$, then, the expression calculated for $H_0(x)$ will be accurate to order $m + 1$ because of the factor of $x$ being multiplied in the equation \ref{h0formula}. Thus, supposing that we start our iteration process with first order accurate expression, $H_1(x) = q_0 x$, we can get to the order $m$ accurate expression for $H_1(x)$ in $m$ iterations which can then be used to calculate $H_0(x)$ correctly to $m+1$ order accuracy.
+
+Let us see how this technique might work for the Poisson distributed random graph. We know that for this case, $G_0(x) = G_1(x) = e ^ {z(x-1)}$. Then, we can start iteration with $q_0 = e^{-z}$. Then, we get the following iterations:
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[scale=0.275]{iterative}
+    \label{fig:iterative}
+\end{figure}
+
+Then, if the probability of a random cluster being of size $s$ is $P_s$, then we have:
+$$
+P_1 = e ^ {-z},\;\;\;P_2 = z e^{-2z},\;\;\;P_3 = \frac{3}{2}z^2 e^{-3z},\;\;\;P_3 = \frac{5}{3}z^3 e^{-4z},
+\;\;\;P_5 = \frac{8}{3}z^4 e^{-5z}
+$$
+
+Similarly, we can calculate higher values of $P_s$. This process is very tedious if done manually but with the help of modern CAS with symbolic mathematics capabilities, we can easily compute these value for much larger orders. However, there are limits imposed by the floating point precision of computers and for such cases, the following formulae have been suggested by Newmann and Moore that uses the formula due to Cauchy:
+\begin{equation}
+    \begin{split}
+        P_s & = \frac{1}{s!} \frac{\partial^s H_0}{\partial x ^s}\Bigr|_{x=0}\\[12pt]
+        & = \frac{1}{2\pi i}\, \displaystyle\oint \frac{H_0(t)\,dt}{t^s}
+    \end{split}
+\end{equation}
+
+Here, the line integral circles around any closed path with the origin inside it but the it should not include the the first pole of $H_0(t)$. For this integral, the largest such path returns the best results. Also, since $H_0(x)$ represents a probability distribution, it can be shown that $H_0(x)$ converges inside the unit circle and therefore, in practice, the unit circles is usually chosen to be the path of integration.
+
+\subsection{Calculation of average size of components}
+
+While it is not always possible to get the values of the PGFs $H_0(x)$ and $H_1(x)$ in closed form, we can usually calculate the distribution's moments. For example, we can get the average size of components like this:
+\begin{equation} \label{averagesize}
+\left< s\right> = H'_0(1) = [G_0(H_1(x)) + x G'_0(H_1(x)) H'_1(x)]_{x=1} = 1 + G'_0(1) H'_1(1)
+\end{equation}
+
+For getting $H'_1(1)$, we diffrentiate the equation \ref{h1formula}:
+\begin{equation}
+H'_1(1) = \frac{1}{1 - G'_1(1)}
+\end{equation}
+
+Then, the from equation \ref{averagesize}, we get:
+
+\begin{equation} \label{avgsizeeqn}
+\left< s\right> = 1 + \frac{G'_0(1)}{1 - G'_1(1)}
+\end{equation}
+
+Also, since:
+
+\begin{equation} \label{averagesizenew}
+G'_0(1) = \displaystyle\sum_{k} k p_k = \left< k\right> = z_1,
+\end{equation}
+
+and,
+
+\begin{equation}
+G'_1(1)  = \frac{\displaystyle\sum_{k=0}^{\infty} (k-1) k p_k}{\sum_{i} i p_i} = \frac{\langle k^2 \rangle - \langle k \rangle}{\langle k \rangle} = \frac{z_2}{z_1},
+\end{equation}
+
+therefore, putting it all into equation \ref{averagesizenew}, we obtain the following result:
+\begin{equation}
+  \left< s\right> = 1 + \frac{z_1^2}{z_1 - z_2}
+\end{equation}
+
+We can use this equation to also show that the phase transition point occurs at $z_1 = Z_2$ since the average component size blows up signifing the formation of huge component.
+
+\subsection{Average componet size past the phase transition point}
+
+The analysis in the previous section holds only for the graphs that have not crossed over the threshold of the phase transition point. However, most real wold networks do in fact contain a huge component within them. So, we shall have to extent our method of the previous section to account for the giant component as well. The problem with the giant component is that as the graph's size $N \rightarrow \infty$, all the non-huge components become tree like with no cycles in them as shown in earlier sections. The huge component however does have cycles in it. So, now we define $H_0(x)$ and $H_1(x)$ so that they generate distributionn for the graph ont including the vertices in the ginat component. One problem this method raises is that now the distributions aren't normalized since we've excluded some vertices. So, now,
+\begin{equation}
+H_0(1) = \displaystyle\sum_s P_s = \mbox{fraction of non-huge component vertices,}
+\end{equation}
+
+since now, $s$ excludes the vertices of the huge component and so, the probabilities' sum is less than unity. Now, let $S$ be the size of the huge component. Then, by the last equation, $S = 1 - H_0(1)$. Fromthe equations \ref{h1formula} and \ref{h0formula}, we get the following:
+
+\begin{equation}
+\begin{split}
+S &= 1 - G_0(v),\\
+v &= G_1(v),\\
+\mbox{and, }\;\;\; v & \equiv H_1(1)
+\end{split}
+\end{equation}
+
+These equations, too, are usually not exactly solvable but can be solved iteratively.
+
+Let us now calculate the average component size by the method used in the last section while being careful of the fact that the distributions are no longer nomalized and so $H_0(1) = H_1(1) = 1$ no longer holds true. Then, we arrive at the following:
+
+\begin{equation}
+  \begin{split}
+    \left< s\right> & = \frac{H'_0(1)}{H_0(1)} = \frac{1}{H_0(1)} \left[  G_0(H_1(1)) + \frac{G'_0(H_1(1)) G_1(H_1(1))}{1 - G'_1(H_1(1))}  \right]\\[12pt]
+    & = 1 + \frac{z v^2}{(1 - S) (1 - G'_1(v))}
+  \end{split}
+\end{equation}
+
+Below the phase transition point, this equation reduces to equation \ref{averagesize}.
+
+Now, let's take an example of this result. Let us suppose we have a graph with an exponential degree distribution. Let the parameter for the distribution be $\kappa$. Then, in the figure \ref{fig:comp-size}, we can see how the size of the huge component changes and average component size changes as $k$ varies. As can be seen clearly, the average component size blows up when we reach the phase transition point and then recedes just as quickly as it grew. Also, the size of the giant component is zero as long as we are below the transition point. Above it, the size grows smoothly.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[scale=0.3]{comp-size}
+    \caption{Average component size and giant component size changes as parameter $\kappa$ of exponential distribution changes}
+    \label{fig:comp-size}
+\end{figure}
+
+\section{Directed network properties}
+
+Most the examples that we've taken until now have been of undirected networks. This means that the relationship between objects isn't directional in nature. However, many networks in real life show directed nature in their realtionships. Some examples of such networks are the world wide web, the predator-prey relationships and supply chain networks.
+
+Directed networks are inherently more difficult to analyse than directed networks. The reason for this is that not all edges are the same - there are edges that go in and then there are edges that go out. As such, each node has two different types of degrees - an in and an out degree. Then, the degree distribution also needs to accodmodate for this fact and now we have a joint distribution, called $p_{jk}$, where $j$ is the indegree and $k$ represents the outdegree.
+
+Let us now take a look at the structure of subgraphs of directed graphs. By virtue of the directed nature of the graphs, even if a path from  $u$ to $v$ exists, there in no guarantee that a path from $v$ to $u$ will exist as well. This leads to portions of the network that are unreachable by some vertices but not by other. In general, we can categorize the node of such a network in the following four ways:
+\begin{enumerate}
+\item All the vertices from which it is possible to reach the vertex $u$ constitute a set called the \textbf{in-component} set.
+\item All the vertices to which a path exists starting at the vertex $u$ constitute a set called the \textbf{out-component} set.
+\item Let $S$ be a set of vertices, all of which it is possible to reach from $u$. Also, let $u$ be reachable from each $v \in S$. Then, the set $S + {u}$ is called a \textbf{strongly connected component} of the graph.
+\item Should we ignore the direction of the edges and treat the graph as a simple undirected graph, then the set of vertices reachable from $u$ form a \textbf{weakly connected component}.
+\end{enumerate}
+
+Now, we shall ignore the cases $(3)$ and $(4)$ from above in the following analysis for the following reasons: The weakly connected component case can be viewed simply as a directed graph for which we have already developed a body of theory in the previous section and in the case of strongly connected components, cycles would exist since there would be a path $p_1$ from $u$ to $v$ and there would be another path $p_2$ from $v$ to $u$ and then $p_1 + p_2$ will form a cycle. In the case of huge graph size, we saw in the last few sections that the nature of components becomes tree like but this can never be the case with strongly connected components. And so, we shall ignore two of these particular cases and continue with the cases $(1)$ and $(2)$.
+
+\subsection{Probability geneting function for directed graphs}
+
+In the last section, we saw the PGF for the distribution $p_k$. In a similar vein, we have the PGF for the the joint degree distribution, $p_{jk}$, which is now a function of two variables:
+\begin{equation}
+    \mathcal{G}(x, y) = \displaystyle\sum_{j=0}^{\infty}\sum_{k=0}^{\infty} p_{jk}x^j y^k
+\end{equation}
+
+This function, similar to the one we discussed before, is normalized. That is, $\mathcal{G}(1, 1) = 1$. The reason for this is clear from the definition of the function. Now, let's consider what the mean degree of a vertex may be in a directed graph. In any directed graph, the indegree and the outdegree are the same because every edge that starts at some vertex ends at some other vertex. Therefore, the mean degree of the graph is defined to be the mean indegree - which is equal to the mean outdegree - of all vertices. Then,
+\begin{equation}
+    z = \frac{\partial\mathcal{G}}{\partial x} \Bigr|_{\substack{x=1\\y=1}} = \frac{\partial\mathcal{G}}{\partial y} \Bigr|_{\substack{x=1\\y=1}}
+\end{equation}
+
+For this euqation to hold, the following must be true:
+\begin{equation}
+    \displaystyle\sum_{jk} (j-k) p_{jk} = 0
+\end{equation}
+
+As with the last section, we can define generating functions that generate the degreed distribution of the outdegree as well at outdegree cluster size. We shall call these $G_0$ and $G_1$ repectively. Similarly, we will define $F_0$ and $F_1$ to be the generating funtions for indegree distribution and the inbound cluster size at the end of any edge repectively. Then, arrive at the following:
+\begin{equation}
+    \begin{split}
+        & F_0(x) = \mathcal{G}(x, 1), \hspace{1cm} F_1(x) = \frac{1}{z}\frac{\partial \mathcal{G}}{\partial y}\Bigr|_{y=1},\\[12pt]
+        & G_0(x) = \mathcal{G}(1, y), \hspace{1cm} G_1(x) = \frac{1}{z}\frac{\partial \mathcal{G}}{\partial x}\Bigr|_{x=1},
+    \end{split}
+\end{equation}
+
+\subsection{Results for directed graphs}
+
+As in the case of undirected graphs, we can use the PGFs obtained in the last section to arrive at results for directed graphs. As in the case of undirected graphs, we have the following equations for directed graphs:
+\begin{equation} \label{directedcomp}
+    \begin{split}
+        H_0(y) & = y G_0(H_1(y)),\\
+        H_1(y) & = y G_1(H_1(y))
+    \end{split}
+\end{equation}
+
+For computing the average size outdegree component, we can use the equation \ref{avgsizeeqn} as we did in the last section. Similar to the last section, we get from the condition for the formation of giant component as using $G'_1(1) = 1$ as follows:
+\begin{equation} \label{transitionpt}
+    \displaystyle\sum_{j, k} (2jk -j -k) p_{jk} = 0
+\end{equation}
+This is similiar, again, to what we get for directed graphs. We could also reach this condition by using the condition $F'_1(1) = 1$ since the total indegree is equal to the total outdegree.
+
+Let us now discuss the nature of the huge component in this case. As with vertices, there can be four different cases of the huge component. It is then our task to categorize which of the four possible huge components gets formed. The formation of weakly connected component is trivial as it is simply considering the directed graph as undirected that gives us the condition for it. However, the possibility for the existence of a huge strongly connected component is non-zero because there can certainly be loops in the huge component. The reason for this is that that unlike other non-giant strongly connected components, the giant strongly connected component does not disappear.
+
+The condition for phase transition was derived from the condition $G'_1(1) = 1$ which represents the point where the average size of the component formed by going along the out-edges of a random vertex blows up. This then implies the formation of a huge in-component since there are a huge number of vertices now which \emph{lead in} to this huge component. Also, as we saw above, we can also arrive at the same condition as the equation \ref{directedcomp} by using the in-component PGF. This then leads to the formation of a huge out-component. Since the condition for the occurrence of both of these components is the same, we reach the conclusion that both the in and out huge components are formed simultaneously at the same phase transition point.
+
+To calculate the size of these two huge components, we take an approach similar to the one we took for undirected graphs. For the case of the huge in-component, let us define $H_0(y)$ and $H_1(y)$ as the generating fuctions that exculde all the vertices that are a part of the huge component. This then allows as to calculate the fraction of the vertices beonging to the huge in-componet, $S_{in}$. Since by definition, $H_0(1)$ is equal to the fraction of the vertices not in the giant component, therefore, the fraction of the vertices \emph{in} the giant component is simply $S_{in} = 1 - H_0(1)$. To calculate the size of the giant incomponent, we can use a similar method by replacing $G_0(x)$ with $F_0(x)$ and $G_1(x)$ with $F_1(x)$
+
+
+Now, we shall calculate the size of the the giant strongly connected component. As before, $H_1(1)$ is the sum of all probabilities over the outdegrees of vertices in the graph that do not lead out to the huge in-component. By the equations \ref{directedcomp}, we can see that $H_1(1)$ is a fixed point for the PGF $G_1(x)$. Let us denote this by $v$ which is then simply $H_1(1)$. For a vertex $A$ with $k$ outedges, the probability that all of the $k$ outedges lead to the non-huge components is just $v^k$ and similarly, the probability that at least some edge leads to the giant component is $1 - v^k$. We also have the fixed point of $F_1(x)$ as $u$ where again, $u$ is the sum of all probabilities over the indegrees of vertices in the graph that do not leas to the huge out-component. Again, as before, $u^j$ will represent the probability that none of the $j$ vertices have any edge acoming into it from the huge in-component. Therefore, the probability that at least some edge is coming in from the huge component is simply $(1- u^k)$. Now, for a vertex to be a part of the giant strongly connected component, it must be both reachable to and from the huge components. Thus, out of the $j$ outgoing edges, some must lead to the huge component and out of the $k$ incoming edges, some must lead in from the huge component. Therefore, the probability that a random vertex is part of the strongly connected giant component is $(1-u^j)(1-v^k)$, Let $S_s$ be the fraction of the graph size which is the strongly connected huge component. Then:
+
+\begin{equation} \label{stronglyconn}
+  \begin{split}
+    S_s & = \displaystyle\sum_{j, k} p_{jk}(1 - u^j)(1-v^k)\\
+    & = \displaystyle\sum_{j, k} p_{jk}(1 - u^j -v^k + u^j v^k)\\
+    & = 1 - \mathcal{G}(u, 1) - \mathcal{G}(1, v) - \mathcal{G}(u, v)
+  \end{split}
+\end{equation}
+
+where,
+
+\begin{equation}
+  u = F_1(u), \hspace{1cm} v = G_1(v)
+\end{equation}
+
+are as discussed in the last paragraph where we have used the equation \ref{directedcomp}. We shall now see that the trasition point for the formation of the strongly connected component is the same as that in equation \ref{transitionpt}. To see this, we first observe that both $u$ and $v$ are equal to unity before the trasition occurs. In that case, $\mathcal{G}(1, 1) = 1$. Then, we see from the equation \ref{stronglyconn} that the giant component formation also begins at the same transition point as point where the transition for the huge in and out components occur.
