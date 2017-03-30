@@ -1,16 +1,20 @@
 <?php
 session_start();                        
 ?> 
+<?php
 
+include 'dbconnect.php'
+?>
 
 <?php
-include 'dbconnect.php'
-//$_SESSION["login"]="";
-if((isset($_SESSION['login']))){
-//  echo "anjali";
-  if ($_SESSION['login'] == true) {
+
+//include 'dbconnect.php'
+
+if(isset($_SESSION['login']))
+{
+  if ($_SESSION['login'] == true) 
+  {
          header("location:http://192.168.121.187:8001/anjali/commonfeed.php");
-                        die;
   }
 }
 

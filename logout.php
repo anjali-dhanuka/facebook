@@ -14,7 +14,7 @@ session_start();
 <?php
 session_destroy();
 
-echo $_SESSION['login'];
+//echo $_SESSION['login'];
 setcookie("anjali", "", time() -3600,'/');
 
 

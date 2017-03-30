@@ -1,16 +1,22 @@
 <?php
 session_start();
 ?>
+<?php
+include 'dbconnect.php'
+?>
+
+
+
 
 <?php
 if(!$_SESSION['login']){
      header("location:http://192.168.121.187:8001/anjali/index.html");
-        die;
+
 }
 $thepost="";
 $username="";
 
-include 'dbconnect.php'
+
 
 
 $username=$_SESSION["username"]; 
